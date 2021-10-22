@@ -1,0 +1,42 @@
+{
+    "name": "devolon/epassi",
+    "description": "epassi package implements ePassi as a gateway of `devolon/payment` package",
+    "keywords": ["laravel", "payment", "ePassi"],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.12",
+        "devolon/payment": "^1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.4.2",
+        "orchestra/testbench-core": "^6.23",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Devolon\\EPassi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Devolon\\EPassi\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Devolon technical team",
+            "homepage": "https://www.devolon.fi"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devolon\\EPassi\\DevolonEPassiServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev"
+}
