@@ -5,7 +5,7 @@
     "require": {
         "php": "^8.0",
         "laravel/framework": "^8.12",
-        "devolon/payment": "^1.0"
+        "devolon/payment": "^v1.3.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.4.2",
@@ -38,5 +38,5 @@
     "config": {
         "preferred-install": "dist"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
