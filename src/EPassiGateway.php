@@ -2,6 +2,7 @@
 
 namespace Devolon\EPassi;
 
+use Devolon\Payment\Contracts\CanRefund;
 use Devolon\Payment\Contracts\HasUpdateTransactionData;
 use Devolon\Payment\Contracts\PaymentGatewayInterface;
 use Devolon\Payment\DTOs\PurchaseResultDTO;
@@ -10,7 +11,7 @@ use Devolon\Payment\Models\Transaction;
 use Devolon\Payment\Services\GenerateCallbackURLService;
 use Devolon\Payment\Services\SetGatewayResultService;
 
-class EPassiGateway implements PaymentGatewayInterface, HasUpdateTransactionData
+class EPassiGateway implements PaymentGatewayInterface, HasUpdateTransactionData, CanRefund
 {
     public const NAME = 'epassi';
 
@@ -70,6 +71,13 @@ class EPassiGateway implements PaymentGatewayInterface, HasUpdateTransactionData
     public function getName(): string
     {
         return self::NAME;
+    }
+
+    public function refund(Transaction $transaction): bool
+    {
+        ($this->setGatewayResultService)($transaction, 'refund', ['status' => 'Refunded']);
+
+        return true;
     }
 
     public function updateTransactionDataRules(string $newStatus): array

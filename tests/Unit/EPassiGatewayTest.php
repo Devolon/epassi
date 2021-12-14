@@ -2,6 +2,7 @@
 
 namespace Devolon\EPassi\Tests\Unit;
 
+use Devolon\Payment\Contracts\CanRefund;
 use Devolon\Payment\Contracts\HasUpdateTransactionData;
 use Devolon\Payment\Contracts\PaymentGatewayInterface;
 use Devolon\Payment\DTOs\PurchaseResultDTO;
@@ -192,6 +193,27 @@ class EPassiGatewayTest extends EPassiTestCase
         // Assert
         $this->assertFalse($result);
         $transaction->refresh();
+    }
+
+    public function testRefund()
+    {
+        // Arrange
+        $setGatewayResultService = $this->mockSetGatewayResultService();
+        /** @var CanRefund $gateway */
+        $gateway = $this->discoverGateway();
+        $transaction = Transaction::factory()->done()->create();
+
+        // Expect
+        $setGatewayResultService
+            ->shouldReceive('__invoke')
+            ->with($transaction, 'refund', ['status' => 'Refunded'])
+            ->once();
+
+        // Act
+        $result = $gateway->refund($transaction);
+
+        // Assert
+        $this->assertTrue($result);
     }
 
     public function testUpdateTransactionDataRulesWithDoneStatus()

@@ -16,8 +16,8 @@ abstract class EPassiTestCase extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         putenv('IS_EPASSI_AVAILABLE=true');
+        parent::setUp();
 
         $this->artisan('migrate:fresh');
 
