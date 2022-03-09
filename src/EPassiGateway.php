@@ -52,7 +52,7 @@ class EPassiGateway implements PaymentGatewayInterface, HasUpdateTransactionData
 
     public function verify(Transaction $transaction, array $data): bool
     {
-        if ($transaction->id !== $data['STAMP']) {
+        if ($transaction->id !== (int) $data['STAMP']) {
             return false;
         }
 
